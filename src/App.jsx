@@ -37,9 +37,9 @@ export default function App() {
               color: isActive ? "red" : "blue",
             };
           }}
-          to="/link2"
+          to="/cat"
         >
-          link2
+          cat
         </NavLink>
       </nav>
       <Outlet />

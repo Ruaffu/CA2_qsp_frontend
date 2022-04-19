@@ -35,7 +35,7 @@ const fetchUserInfo = () => {
    return fetch(URL + "/api/info/userinfo", options).then(handleHttpErrors);
 }
 
-const fetchCatFacts = () => {
+const fetchCat = () => {
     const options = makeOptions("GET",true); //True add's the token
    return fetch(URL + "/api/cat/cat", options).then(handleHttpErrors);
 }
@@ -62,7 +62,8 @@ const makeOptions= (method,addToken,body) =>{
      loggedIn,
      login,
      logout,
-     fetchUserInfo
+     fetchUserInfo,
+     fetchCat,
  }
 }
 const facade = apiFacade();
