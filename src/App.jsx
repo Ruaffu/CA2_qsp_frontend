@@ -27,9 +27,9 @@ export default function App() {
               color: isActive ? "red" : "blue",
             };
           }}
-          to="/link1"
+          to="/login"
         >
-          link1
+          login
         </NavLink>{" "}
         <NavLink
           style={({ isActive }) => {

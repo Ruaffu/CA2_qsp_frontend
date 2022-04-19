@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./components/Home";
 import NoMatch from "./components/NoMatch";
+import LoginPage from "./components/LoginPage";
 
 const rootElement = document.getElementById("root");
 render(
@@ -11,7 +12,7 @@ render(
       <Route path="/" element={<App />}>
         <Route path="/" element={<Home/>}>
         </Route>
-        <Route path="link1" element={<h1>link1</h1>} />
+        <Route path="login" element={<LoginPage/>} />
         <Route path="link2" element={<h1>link2</h1>} />
         <Route path="*" element={<NoMatch/>} />
     
