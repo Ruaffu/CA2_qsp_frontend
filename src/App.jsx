@@ -1,48 +1,16 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
-
+import "./styles/App.css";
 export default function App() {
   return (
     <div>
-      <h1>Quck-start project</h1>
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}
-      >
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "red" : "blue",
-            };
-          }}
-          to="/"
-        >
-          home
-        </NavLink>{" "}
-        |{" "}
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "red" : "blue",
-            };
-          }}
-          to="/login"
-        >
-          login
-        </NavLink>{" "}
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "red" : "blue",
-            };
-          }}
-          to="/cat"
-        >
-          cat
-        </NavLink>
+    <header>
+      <nav>
+        <NavLink className="nav-link" to="/">Home</NavLink>
+        <NavLink className="nav-link" to="cat">Generate</NavLink>
+        <NavLink className="nav-button" to="login">Login</NavLink>
       </nav>
-      <Outlet />
-    </div>
+    </header>
+    <Outlet />
+  </div>
   );
 }
