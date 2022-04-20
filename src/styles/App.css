@@ -67,7 +67,7 @@ main {
   flex: 100%;
 }
 
-input[type=text], input[type=pasword], button {
+input[type=text], input[type=password], button {
   width: 100%;
   height: 40px;
   padding: 3px 7px;

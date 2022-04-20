@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import facade from "../apiFacade";
 import "../styles/LoginPage.css";
 
-function LogIn({ login }) {
+function LogIn({ login, creatingUser}) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
 
@@ -21,8 +21,39 @@ function LogIn({ login }) {
         <h2>Log in</h2>
         <form onChange={onChange} >
           <input type="text" placeholder="User Name" id="username" />
-          <input type="pasword" placeholder="Password" id="password" />
+          <input type="password" placeholder="Password" id="password" />
           <button className="login-button" onClick={performLogin}>Login</button>
+          <button className="login-button" onClick={creatingUser}>Create</button>
+        </form>
+      </div>
+    </div>
+
+  )
+
+}
+
+
+function CreateUser({create}) {
+  const init = { username: "", password: "" };
+  const [loginCredentials, setLoginCredentials] = useState(init);
+
+  const performLogin = (evt) => {
+    evt.preventDefault();
+    create(loginCredentials.username, loginCredentials.password);
+  }
+  const onChange = (evt) => {
+    setLoginCredentials({ ...loginCredentials, [evt.target.id]: evt.target.value })
+  }
+
+  return (
+
+    <div className="smaller-container">
+      <div className="login-section">
+        <h2>Create user</h2>
+        <form onChange={onChange} >
+          <input type="text" placeholder="User Name" id="username" />
+          <input type="password" placeholder="Password" id="password" />
+          <button className="login-button" onClick={performLogin}>Create</button>
         </form>
       </div>
     </div>
@@ -47,7 +78,8 @@ function LoggedIn() {
 }
 
 function LoginPage() {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [creatingUser, setCreatingUser] = useState(false);
 
   const logout = () => {
     facade.logout()
@@ -58,9 +90,17 @@ function LoginPage() {
       .then(res => setLoggedIn(true));
   }
 
+  function createUser () {
+    setCreatingUser(!creatingUser);
+  }
+
+  const create = (user, pass) => {
+    facade.create(user, pass)
+  }
+
   return (
     <main>
-      {!loggedIn ? (<LogIn login={login} />) :
+      {!loggedIn ? (!creatingUser? (<LogIn login={login} creatingUser={createUser}/>) : (<CreateUser create={create}/>)) :
         (<div>
           <LoggedIn />
           <button onClick={logout}>Logout</button>
