@@ -17,7 +17,7 @@ const getToken = () => {
 }
 const loggedIn = () => {
   const loggedIn = getToken() != null;
-  return loggedIn;
+  return loggedIn; 
 }
 const logout = () => {
   localStorage.removeItem("jwtToken");
