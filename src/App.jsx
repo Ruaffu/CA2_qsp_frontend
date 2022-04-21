@@ -1,41 +1,31 @@
-import { Outlet, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
 import apiFacade from "./apiFacade.js";
+import Home from "./components/Home";
+import NoMatch from "./components/NoMatch";
+import LoginPage from "./components/LoginPage";
+import Cat from "./components/Cat";
+import { useState } from "react";
+import Header from "./components/Header";
+
 export default function App() {
 
 
-  function logout() {
-    apiFacade.logout();
-  }
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  /* const  getUsername = () => {
-    const data = apiFacade.fetchUserInfo().then(data => data);
-    return data.userName;
-  }
- */
   return (
     <div>
-      <header>
-        <nav>
-          <NavLink className="nav-link" to="/">Home</NavLink>
-          <NavLink className="nav-link" to="cat">Generate</NavLink>
-
-
-          {
-            apiFacade.loggedIn() ?
-              <>
-               {/*  <NavLink className="nav-button" to="/">{getUsername}</NavLink> */}
-                <NavLink className="nav-button" to="/" onClick={logout}>Logout</NavLink>
-              </>
-
-
-              : <NavLink className="nav-button" to="login">Login</NavLink>
-          }
-
-
-        </nav>
-      </header>
-      <Outlet />
+      <BrowserRouter>
+      <Header loggedIn={loggedIn}/>
+    <Routes>
+        <Route path="/" element={<Home/>}>
+        </Route>
+        <Route path="login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
+        <Route path="cat" element={<Cat/>} />
+        <Route path="*" element={<NoMatch/>} />
+    </Routes>
+  </BrowserRouter>,
     </div>
+    
   );
 }
